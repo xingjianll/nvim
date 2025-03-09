@@ -19,8 +19,9 @@ vim.cmd[[colorscheme tokyonight]]
 vim.cmd[[colorscheme tokyonight-night]]
 vim.cmd[[cd]]
 
-vim.g.neovide_scale_factor = 1.2
+vim.opt.termguicolors = true
+-- vim.g.neovide_scale_factor = 1.2
 
-vim.g.neovide_transparency = 0.97
-vim.g.transparency = 0.1
-vim.g.neovide_background_color = ("#ffffff" .. string.format("%x", math.floor(((255 * vim.g.transparency) or 0.8))))
+-- vim.g.neovide_transparency = 0.97
+-- vim.g.transparency = 0.1
+-- vim.g.neovide_background_color = ("#ffffff" .. string.format("%x", math.floor(((255 * vim.g.transparency) or 0.8))))

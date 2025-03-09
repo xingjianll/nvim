@@ -22,7 +22,7 @@ local plugins =
   "christoomey/vim-tmux-navigator", -- 用ctl-hjkl来定位窗口
   {'nvim-treesitter/nvim-treesitter', tag = 'v0.9.2'},
   "p00f/nvim-ts-rainbow", -- 配合treesitter，不同括号颜色区分
-  "akinsho/bufferline.nvim",
+  -- "akinsho/bufferline.nvim",
 
   {
     "williamboman/mason.nvim",
@@ -51,22 +51,45 @@ local plugins =
     lazy = false,
     priority = 1000,
   },
---{
---  "kawre/leetcode.nvim",
---  build = ":TSUpdate html",
---  dependencies = {
---      "nvim-telescope/telescope.nvim",
---      "nvim-lua/plenary.nvim", -- required by telescope
---      "MunifTanjim/nui.nvim",
---
---      -- optional
---      "rcarriga/nvim-notify",
---  },
---  opts = {
---    lang = "python3"
---      -- configuration goes here
---  },
---},
+  ---@type LazySpec
+  {
+    "mikavilpas/yazi.nvim",
+    event = "VeryLazy",
+    dependencies = { "folke/snacks.nvim", lazy = true },
+    keys = {
+      -- 👇 in this section, choose your own keymappings!
+      {
+        "<leader>-",
+        mode = { "n", "v" },
+        "<cmd>Yazi<cr>",
+        desc = "Open yazi at the current file",
+      },
+      {
+        -- Open in the current working directory
+        "<leader>cw",
+        "<cmd>Yazi cwd<cr>",
+        desc = "Open the file manager in nvim's working directory",
+      },
+      {
+        "<c-up>",
+        "<cmd>Yazi toggle<cr>",
+        desc = "Resume the last yazi session",
+      },
+    },
+    opts = {
+      -- if you want to open yazi instead of netrw, see below for more info
+      open_for_directories = false,
+      keymaps = {
+        show_help = "<f1>",
+      },
+    },
+    -- 👇 if you use `open_for_directories=true`, this is recommended
+    init = function()
+      -- More details: https://github.com/mikavilpas/yazi.nvim/issues/802
+      -- vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+    end,
+  },
     -- nvim lua config highlights
   {
     "folke/lazydev.nvim",
